@@ -5,7 +5,7 @@ app = Flask(__name__) # first argument is the name of the application's module
 
 @app.route("/") # route decorator to tell Flask what URL should trigger the function that follows.
 def index():
-    return '<h1>Hello</h1> <h2>World</h2>'
+    return render_template("index.html")
 
 if __name__ == "__main__":
     app.run(
