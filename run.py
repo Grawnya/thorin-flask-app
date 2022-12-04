@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 import os
 
+
 app = Flask(__name__) # first argument is the name of the application's module
 
 @app.route("/") # route decorator to tell Flask what URL should trigger the function that follows.
@@ -10,7 +11,7 @@ def index():
 
 @app.route("/about")
 def about():
-    return render_template("about.html", page_title="About")
+    return render_template("about.html", page_title="About", list_of_numbers=[1,2,3])
 
 
 @app.route("/contact")
