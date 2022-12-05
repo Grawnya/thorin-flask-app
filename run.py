@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 import os
 import json
-
+if os.path.exists("env.py"):
+    import env
 
 app = Flask(__name__) # first argument is the name of the application's module
+app.secret_key = os.environ.get("SECRET_KEY")
 
 @app.route("/") # route decorator to tell Flask what URL should trigger the function that follows.
 def index():
@@ -21,7 +23,6 @@ def about_member(member_name):
     return render_template("member.html", member=member) # where member parameter is file name and equal member value is the member dict at start of func
 
 
-
 @app.route("/about")
 def about():
     data = []
@@ -33,7 +34,7 @@ def about():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-        print(request.form["email"])
+        flash(f"Thanks {request.form.get('name')}, we have received your message")
     return render_template("contact.html", page_title="Contact")
 
 
